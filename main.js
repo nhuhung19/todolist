@@ -43,15 +43,14 @@ const render = (status) => {
         filter = todoList.filter((taskDone) => !taskDone.isDone)
         document.getElementById('value-undone').innerHTML = filter.length
     }
-
-
+    filter.sort((a, b) => a.piorty < b.piorty ? 1 : -1)
     console.log("filter", filter)
     let htmlTodoArray = filter.map((item, index) => {
         return `<li><span  style="text-decoration: ${item.isDone ? 'line-through': ''}" onclick="toggleDone(${index})">${item.text}
         <a>${item.isDone ? 'Mark Undone': 'Mark Done'}</a>
         </span>${piortyTodo(item.piorty)}
         <button onclick="removeItem(${index})">X</button></li>`
-    }).sort((a, b) => a.piorty < b.piorty ? 1 : -1).join('')
+    }).join('')
     document.getElementById('resultArea').innerHTML = htmlTodoArray
     saveTodos()
 
